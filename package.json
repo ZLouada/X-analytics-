@@ -1,0 +1,69 @@
+{
+  "name": "x-analytics-free",
+  "version": "1.0.0",
+  "description": "Free, self-hosted X (Twitter) Analytics — run your own analytics with your own account. No subscription needed.",
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm:dev:server\" \"npm:dev:ui\"",
+    "dev:server": "tsx watch src/server/index.ts",
+    "dev:ui": "vite --host",
+    "build": "npm run build:server && npm run build:ui",
+    "build:server": "tsc -p tsconfig.build.json",
+    "build:ui": "vite build --outDir dist/public",
+    "start": "node dist/server/index.js",
+    "db:init": "tsx scripts/init-db.ts",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext ts,tsx",
+    "format": "prettier --write \"src/**/*.{ts,tsx,json,md}\"",
+    "docker:build": "docker compose build",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.4.3",
+    "commander": "^12.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "csv-stringify": "^6.4.1",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "helmet": "^7.1.0",
+    "jose": "^5.2.3",
+    "node-fetch": "^3.3.2",
+    "open": "^10.1.0",
+    "pdfkit": "^0.15.0",
+    "pino": "^9.0.0",
+    "pino-pretty": "^11.0.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.10",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "@types/pdfkit": "^0.13.2",
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
+    "tsx": "^4.7.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.8",
+    "vitest": "^1.5.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["better-sqlite3"]
+  }
+}
